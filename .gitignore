@@ -10,3 +10,4 @@ rad.json
 .alcache/
 .altemplates/
 cache_*
+**/.DS_Store
