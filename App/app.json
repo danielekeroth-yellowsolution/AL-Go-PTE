@@ -1,0 +1,29 @@
+{
+    "id": "",
+    "name": "App Name",
+    "publisher": "Yellow Solution AB",
+    "version": "1.0.0.0",
+    "brief": "App Name",
+    "description": "App Name",
+    "privacyStatement": "https://yellowsolution.se",
+    "EULA": "https://yellowsolution.se",
+    "help": "https://yellowsolution.se",
+    "url": "https://yellowsolution.se",
+    "logo": "logo.png",
+    "dependencies": [],
+    "screenshots": [],
+    "platform": "20.0.0.0",
+    "application": "20.0.0.0",
+    "idRanges": [
+      {
+        "from": 50000,
+        "to": 50000
+      }
+    ],
+    "resourceExposurePolicy": {
+      "allowDebugging": true,
+      "allowDownloadingSource": false,
+      "includeSourceInSymbolFile": false
+    },
+    "runtime": "9.0"
+  }
