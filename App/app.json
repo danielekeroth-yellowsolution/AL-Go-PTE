@@ -25,5 +25,7 @@
       "allowDownloadingSource": false,
       "includeSourceInSymbolFile": false
     },
-    "runtime": "9.0"
+    "runtime": "9.0",
+    "features": ["TranslationFile"],
+    "suppressWarnings": ["AS0084", "AS0051", "AS0092", "AS0094"]
   }

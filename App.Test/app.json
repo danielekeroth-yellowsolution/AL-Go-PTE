@@ -44,5 +44,6 @@
       "allowDownloadingSource": false,
       "includeSourceInSymbolFile": false
     },
-    "runtime": "9.0"
+    "runtime": "9.0",
+    "suppressWarnings": ["AS0084", "AS0051", "AS0092", "AS0094", "AS0015"]
   }
