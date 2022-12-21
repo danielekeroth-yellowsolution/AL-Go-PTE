@@ -1,6 +1,35 @@
-## v2.0
+## v2.2
 
-Note that when using the preview version of AL-Go for GitHub, you need to Update your AL-Go system files, as soon as possible when told to do so.
+### Enhancements
+- Container Event log is added as a build artifact if builds or tests are failing
+
+### Issues
+- Issue #280 Overflow error when test result summary was too big
+- Issue #282, 292 AL-Go for GitHub causes GitHub to issue warnings
+- Issue #273 Potential security issue in Pull Request Handler in Open Source repositories
+- Issue #303 PullRequestHandler fails on added files
+- Issue #299 Multi-project repositories build all projects on Pull Requests
+- Issue #291 Issues with new Pull Request Handler 
+- Issue #287 AL-Go pipeline fails in ReadSettings step
+
+### Changes
+- VersioningStrategy 1 is no longer supported. GITHUB_ID has changed behavior (Issue #277)
+
+## v2.1
+
+### Issues
+- Issue #233 AL-Go for GitHub causes GitHub to issue warnings
+- Issue #244 Give error if AZURE_CREDENTIALS contains line breaks
+
+### Changes
+- New workflow: PullRequestHandler to handle all Pull Requests and pass control safely to CI/CD
+- Changes to yaml files, PowerShell scripts and codeowners files are not permitted from fork Pull Requests
+- Test Results summary (and failed tests) are now displayed directly in the CI/CD workflow and in the Pull Request Check
+
+### Continuous Delivery
+- Proof Of Concept Delivery to GitHub Packages and Nuget
+
+## v2.0
 
 ### Issues
 - Issue #143 Commit Message for **Increment Version Number** workflow
