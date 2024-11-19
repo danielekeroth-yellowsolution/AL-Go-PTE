@@ -168,7 +168,7 @@ jobs:
       # Repository Synchronization
       # =============================================================================
       - name: Synchronize Repositories
-        if: steps.check.outputs.should_continue == 'true' && steps.cleanup.outputs.should_push == 'true'
+        if: steps.cleanup.outputs.should_push == 'true'
         run: |
           git add .
           git commit -m "feat: Synchronized with primary repository"
