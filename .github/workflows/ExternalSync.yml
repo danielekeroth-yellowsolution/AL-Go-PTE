@@ -1,0 +1,196 @@
+# =============================================================================
+# Enterprise Repository Synchronization Workflow
+# =============================================================================
+# 
+# Purpose:
+#   Maintains a sanitized version of this repository by automatically
+#   synchronizing content while removing sensitive data based on configurable
+#   patterns. Designed for maintaining public-facing repositories that mirror
+#   internal development.
+#
+# Configuration:
+#   Required Secrets:
+#   - CLIENT_REPO_TOKEN: Authentication token for target repository
+#
+#   Required Variables:
+#   - TARGET_REPO:      Target repository path (org/repo)
+#   - CLEANUP_COMMANDS: Multi-line patterns for sensitive data removal (optional)
+#
+# Author: Daniel Ekeroth
+# Last Modified: 2024-11-14
+# =============================================================================
+
+name: Sync Clean Repository
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '.github/workflows/**'  # Prevent recursive triggers
+  workflow_dispatch:           # Enable manual execution
+
+jobs:
+  # =============================================================================
+  # Validation Phase
+  # =============================================================================
+  pre-check:
+    runs-on: ubuntu-latest
+    outputs:
+      should_continue: ${{ steps.check.outputs.should_continue }}
+    steps:
+      - name: Validate Configuration
+        id: check
+        run: |
+          # Comprehensive configuration validation
+          declare -a missing_configs=()
+          
+          [ -z "${{ secrets.CLIENT_REPO_TOKEN }}" ] && \
+            missing_configs+=("CLIENT_REPO_TOKEN secret")
+          [ -z "${{ vars.TARGET_REPO }}" ] && \
+            missing_configs+=("TARGET_REPO variable")
+          
+          if [ ${#missing_configs[@]} -ne 0 ]; then
+            echo "Configuration validation failed. Missing:"
+            printf '%s\n' "${missing_configs[@]}"
+            echo "should_continue=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "Configuration validation successful"
+          echo "should_continue=true" >> $GITHUB_OUTPUT
+
+  # =============================================================================
+  # Synchronization Phase
+  # =============================================================================
+  sync:
+    needs: pre-check
+    if: needs.pre-check.outputs.should_continue == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initialize Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Configure Git Environment
+        run: |
+          git config --global credential.helper store
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+
+      - name: Prepare Clean Branch
+        run: |
+          git checkout --orphan temp_branch
+
+      # =============================================================================
+      # Data Sanitization
+      # =============================================================================
+      - name: Execute Data Sanitization
+        id: cleanup
+        run: |
+          # Enterprise-standard sensitive data removal configuration
+          readonly DEFAULT_FOLDERS=".AL-Go .github"
+          
+          # Initialize status tracking
+          SENSITIVE_DATA_FOUND=false
+          FINAL_CHECK_FAILED=false
+          
+          # Utility function for secure file removal
+          secure_remove() {
+            local target="$1"
+            echo "Initiating removal: $target"
+            rm -rfv "$target"
+            
+            if test -e "$target"; then
+              echo "CRITICAL: Removal failed for: $target"
+              return 1
+            fi
+            echo "SUCCESS: Removed $target"
+            return 0
+          }
+          
+          # Process custom cleanup patterns if defined
+          if [ ! -z "${{ vars.CLEANUP_COMMANDS }}" ]; then
+            echo "Executing custom sanitization patterns..."
+            echo "${{ vars.CLEANUP_COMMANDS }}" > cleanup_list.txt
+            
+            while IFS= read -r item || [ -n "$item" ]; do
+              [ -z "$item" ] && continue
+              
+              item_clean=$(echo "${item%/}" | tr -d '[:space:]')
+              echo "Processing pattern: $item_clean"
+              
+              if [[ "$item_clean" == **/* ]] || [[ "$item_clean" == *"*"* ]]; then
+                # Handle glob pattern matching
+                pattern="${item_clean#**/}"
+                [ "$item_clean" == **/* ] && pattern="${item_clean#**/}" || pattern="$item_clean"
+                
+                echo "Executing glob pattern: $pattern"
+                found_items=$(find . -name "$pattern")
+                
+                if [ ! -z "$found_items" ]; then
+                  echo "Located matching items:"
+                  echo "$found_items"
+                  
+                  echo "$found_items" | while read -r found_item; do
+                    secure_remove "$found_item" || SENSITIVE_DATA_FOUND=true
+                  done
+                fi
+              else
+                # Handle direct path removal
+                test -e "$item_clean" && secure_remove "$item_clean" || \
+                  echo "INFO: $item_clean not present"
+              fi
+            done < cleanup_list.txt
+            rm cleanup_list.txt
+          fi
+          
+          # Process default security patterns
+          echo "Executing default security patterns: $DEFAULT_FOLDERS"
+          for folder in $DEFAULT_FOLDERS; do
+            [ -d "$folder" ] && secure_remove "$folder" || \
+              echo "INFO: Default pattern $folder not present"
+          done
+          
+          # Comprehensive security verification
+          echo "Executing final security verification..."
+          if [ "$SENSITIVE_DATA_FOUND" = true ] || [ "$FINAL_CHECK_FAILED" = true ]; then
+            echo "CRITICAL: Security verification failed. Sync aborted."
+            echo "should_push=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          
+          echo "Security verification passed successfully"
+          echo "should_push=true" >> $GITHUB_OUTPUT
+
+      # =============================================================================
+      # Repository Synchronization
+      # =============================================================================
+      - name: Synchronize Repositories
+        if: steps.check.outputs.should_continue == 'true' && steps.cleanup.outputs.should_push == 'true'
+        run: |
+          git add .
+          git commit -m "feat: Synchronized with primary repository"
+          git push https://${{ secrets.CLIENT_REPO_TOKEN }}@github.com/${{ vars.TARGET_REPO }} temp_branch:main --force
+
+  # =============================================================================
+  # Status Reporting
+  # =============================================================================
+  status:
+    needs: [pre-check, sync]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Status Report
+        run: |
+          if [ "${{ needs.pre-check.outputs.should_continue }}" == "false" ]; then
+            echo "STATUS: Configuration incomplete - sync skipped"
+            exit 0
+          elif [ "${{ needs.sync.result }}" == "success" ]; then
+            echo "STATUS: Synchronization completed successfully"
+            exit 0
+          else
+            echo "STATUS: Synchronization failed - see logs for details"
+            exit 1
+          fi
