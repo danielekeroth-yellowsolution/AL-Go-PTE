@@ -172,7 +172,7 @@ jobs:
         run: |
           git add .
           git commit -m "feat: Synchronized with primary repository"
-          git push https://${{ secrets.CLIENT_REPO_TOKEN }}@github.com/${{ vars.TARGET_REPO }} temp_branch:main --force
+          git push https://${{ secrets.CLIENT_REPO_TOKEN }}@${{ vars.TARGET_REPO }} temp_branch:main --force
 
   # =============================================================================
   # Status Reporting
