@@ -16,8 +16,8 @@
     "installTestApps": [],
     "enableCodeCop": true,
     "enableUICop": true,
-    "artifact": "https://github.com/danielekeroth-yellowsolution/AL-Go-PTE/releases",
+    "artifact": "https://github.com/danielekeroth-yellowsolution/AL-Go-PTE/releases/v1.0.0",
     "generateDependencyArtifact": true,
-    "repoVersion": "1.0",
+    "repoVersion": "1.0.0",
     "packageTokenSecretName": "PACKAGES_TOKEN"
 }
