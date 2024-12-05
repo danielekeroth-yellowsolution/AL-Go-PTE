@@ -31,7 +31,5 @@
     "suppressWarnings": ["AS0084", "AS0051", "AS0092", "AS0094", "AS0015"],
     "contextSensitiveHelpUrl": "https://learn.microsoft.com/dynamics365/business-central/",
     "applicationInsightsConnectionString": "",
-    "keyVaultUrls": [],
-    "githubRepository": "https://github.com/danielekeroth-yellowsolution/AL-Go-PTE",
-    "githubPackages": true
+    "keyVaultUrls": []
   }

@@ -1,4 +1,23 @@
 {
     "type": "PTE",
-    "templateUrl": "https://github.com/YellowSolution/AL-Go-PTE@main"
+    "templateUrl": "https://github.com/YellowSolution/AL-Go-PTE@main",
+    "githubRunner": "windows-latest",
+    "useCompilerFolder": false,
+    "runs-on": "windows-latest",
+    "shell": "powershell",
+    "appFolders": [
+        "App"
+    ],
+    "testFolders": [
+        "App.Test"
+    ],
+    "bcptTestFolders": [],
+    "installApps": [],
+    "installTestApps": [],
+    "enableCodeCop": true,
+    "enableUICop": true,
+    "artifact": "https://github.com/danielekeroth-yellowsolution/AL-Go-PTE/releases",
+    "generateDependencyArtifact": true,
+    "repoVersion": "1.0",
+    "packageTokenSecretName": "PACKAGES_TOKEN"
 }
