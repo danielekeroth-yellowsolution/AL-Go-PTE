@@ -1,5 +1,5 @@
 {
-    "id": "00000000-0000-0000-0000-000000000000",
+    "id": "3b8d57bb-4966-4357-a1e3-0e441075c2fe",
     "name": "App Name",
     "publisher": "Yellow Solution AB",
     "version": "1.0.0.0",
@@ -22,10 +22,16 @@
     ],
     "resourceExposurePolicy": {
       "allowDebugging": true,
-      "allowDownloadingSource": false,
-      "includeSourceInSymbolFile": false
+      "allowDownloadingSource": true,
+      "includeSourceInSymbolFile": true
     },
-    "runtime": "9.0",
+    "runtime": "11.0",
+    "target": "Cloud",
     "features": ["TranslationFile"],
-    "suppressWarnings": ["AS0084", "AS0051", "AS0092", "AS0094"]
+    "suppressWarnings": ["AS0084", "AS0051", "AS0092", "AS0094"],
+    "contextSensitiveHelpUrl": "https://learn.microsoft.com/dynamics365/business-central/",
+    "applicationInsightsConnectionString": "",
+    "keyVaultUrls": [],
+    "githubRepository": "https://github.com/danielekeroth-yellowsolution/AL-Go-PTE",
+    "githubPackages": true
   }

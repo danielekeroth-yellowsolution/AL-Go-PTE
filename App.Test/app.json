@@ -1,5 +1,5 @@
 {
-    "id": "00000000-0000-0000-0000-000000000000",
+    "id": "018c17c7-f0f7-4414-b348-9b5c96862658",
     "name": "Test App Name",
     "publisher": "Yellow Solution AB",
     "version": "1.0.0.0",
@@ -10,40 +10,28 @@
     "help": "https://yellowsolution.se",
     "url": "https://yellowsolution.se",
     "logo": "",
-    "dependencies": [
-      {
-        "id": "",
-        "name": "App Name",
-        "publisher": "Yellow Solution AB",
-        "version": "1.0.0.0"
-      },
-      {
-        "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
-        "publisher": "Microsoft",
-        "name": "Library Assert",
-        "version": "20.0.0.0"
-      },
-      {
-        "id": "e7320ebb-08b3-4406-b1ec-b4927d3e280b",
-        "publisher": "Microsoft",
-        "name": "Any",
-        "version": "20.0.0.0"
-      }
-    ],
+    "dependencies": [],
+    "features": ["TranslationFile"],
     "screenshots": [],
     "platform": "20.0.0.0",
     "application": "20.0.0.0",
     "idRanges": [
       {
-        "from": 50000,
-        "to": 50000
+        "from": 50150,
+        "to": 50199
       }
     ],
     "resourceExposurePolicy": {
       "allowDebugging": true,
-      "allowDownloadingSource": false,
-      "includeSourceInSymbolFile": false
+      "allowDownloadingSource": true,
+      "includeSourceInSymbolFile": true
     },
-    "runtime": "9.0",
-    "suppressWarnings": ["AS0084", "AS0051", "AS0092", "AS0094", "AS0015"]
+    "runtime": "11.0",
+    "target": "Cloud",
+    "suppressWarnings": ["AS0084", "AS0051", "AS0092", "AS0094", "AS0015"],
+    "contextSensitiveHelpUrl": "https://learn.microsoft.com/dynamics365/business-central/",
+    "applicationInsightsConnectionString": "",
+    "keyVaultUrls": [],
+    "githubRepository": "https://github.com/danielekeroth-yellowsolution/AL-Go-PTE",
+    "githubPackages": true
   }
