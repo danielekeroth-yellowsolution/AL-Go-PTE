@@ -5,6 +5,7 @@ permissionset 54790 MyPermissionSet
     Assignable = true;
     Permissions =
         table "YelBas Log Entry" = X,
+        tabledata "YelBas Log Entry" = RIMD,
         page "YelBas Log Entry Card" = X,
         page "YelBas Log Entries" = X;
 }
