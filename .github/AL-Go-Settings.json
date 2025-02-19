@@ -1,7 +1,7 @@
 {
     "type": "PTE",
     "templateUrl": "https://github.com/YellowSolution/AL-Go-PTE@main",
-    "githubRunner": "windows-latest",
+    "githubRunner": "self-hosted",
     "useCompilerFolder": false,
     "runs-on": "windows-latest",
     "shell": "powershell",
