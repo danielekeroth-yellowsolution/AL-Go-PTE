@@ -12,5 +12,5 @@
     ],
     "vsixFile": "Latest",
     "enableExternalRulesets": true,
-    "rulesetFile": "ruleset.json"
+    "rulesetFile": "./App/ruleset.json"
 }
