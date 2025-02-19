@@ -1,5 +1,23 @@
 {
     "country":  "se",
+    "type": "PTE",
+    "templateUrl": "https://github.com/YellowSolution/AL-Go-PTE",
+    "projectName": "ALGO-Pte",
+    "alDoc": {
+        "continuousDeployment": true,
+        "deployToGitHubPages": true
+    },
+    "generateDependencyArtifact": true,
+    "appDependencyProbingPaths": [
+        {
+            "repo": "",
+            "version": "",
+            "release_status": "",
+            "projects": "",
+            "branch": "",
+            "AuthTokenSecret": ""
+        }
+    ],
     "appFolders":  [
     ],
     "testFolders":  [

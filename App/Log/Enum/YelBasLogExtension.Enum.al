@@ -8,5 +8,8 @@ enum 54751 "YelBas Log Extension"
     Extensible = true;
     Caption = 'Log Extension';
 
-    value(0; " ") { }
+    value(0; " ")
+    {
+        Caption = ' ', Locked = true;
+    }
 }
