@@ -1,5 +1,14 @@
 namespace YellowSolution.Y365Base.Log;
 
+permissionset 54790 MyPermissionSet
+{
+    Assignable = true;
+    Permissions =
+        table "YelBas Log Entry" = X,
+        page "YelBas Log Entry Card" = X,
+        page "YelBas Log Entries" = X;
+}
+
 /// <summary>
 /// Log Entries
 /// </summary>

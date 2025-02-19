@@ -2,10 +2,5 @@
     "name": "LinterCopRuleset",
     "description": "These are the default rules of the linter cop. You can use this file as a template to start from",
     "rules": [
-      {
-        "id": "LC0064",
-        "action": "error",
-        "justification": "Documentation comment missing."
-      }
     ]
   }

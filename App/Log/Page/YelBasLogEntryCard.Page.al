@@ -1,38 +1,31 @@
 namespace YellowSolution.Y365Base.Log;
 
 /// <summary>
-/// Log Entries
+/// Log Entry Card
 /// </summary>
-page 54750 "YelBas Log Entries"
+page 54751 "YelBas Log Entry Card"
 {
-    ApplicationArea = All;
-    Caption = 'Yellow Log';
-    PageType = List;
-    CardPageID = "YelBas Log Entry Card";
-    SourceTable = "YelBas Log Entry";
-    UsageCategory = Administration;
+    Caption = 'Log Card';
     Editable = false;
-    SourceTableView = sorting("Entry No") order(descending);
+    PageType = Card;
+    SourceTable = "YelBas Log Entry";
+
     layout
     {
-        area(content)
+        area(Content)
         {
-            repeater(General)
+            group(General)
             {
-                field("Entry No"; Rec."Entry No")
+                ShowCaption = false;
+                field(EntryNo; Rec."Entry No")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Entry No field.';
+                    ToolTip = 'Specifies the number of the entry, as assigned from the specific number series when the entry was created.';
                 }
-                field("Date"; Rec."Date")
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Date field.';
-                }
-                field(Message; Rec.Message)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Message field.';
+                    ToolTip = 'Specifies the date and the time when this entry was created.';
                 }
                 field("Type"; Rec."Type")
                 {
@@ -59,6 +52,23 @@ page 54750 "YelBas Log Entries"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Source Id 2 field.';
                 }
+                field(Message; Rec.Message)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the message of the log Entry';
+                }
+            }
+
+            group(DataGroup)
+            {
+                Caption = 'Data';
+                field(Data; GetLogData.GetDataAsText(Rec))
+                {
+                    ApplicationArea = All;
+                    Caption = 'Data';
+                    MultiLine = true;
+                    ToolTip = 'Specifies the data of the log entry';
+                }
             }
         }
     }
@@ -67,18 +77,16 @@ page 54750 "YelBas Log Entries"
     {
         area(Processing)
         {
-            action(ClearLog)
+            action(Download)
             {
                 ApplicationArea = All;
-                Caption = 'Clear Log';
-                ToolTip = 'Clear all records in the log';
-                Image = ClearLog;
+                Caption = 'Download data';
+                Image = Download;
+                ToolTip = 'Download Log Entry data.';
 
                 trigger OnAction()
-                var
-                    ClearLog: Codeunit "YelBas Clear Log";
                 begin
-                    ClearLog.Clear();
+                    DownloadDataFromLog.DownloadDataFromLog(Rec);
                 end;
             }
         }
@@ -99,4 +107,8 @@ page 54750 "YelBas Log Entries"
         Rec.CalcFields("Json Data");
         Rec."Json Data".CreateInStream(lIStreamRequest);
     end;
+
+    var
+        DownloadDataFromLog: Codeunit "YelBas DownloadDataFromLog";
+        GetLogData: Codeunit "YelBas GetLogData";
 }
