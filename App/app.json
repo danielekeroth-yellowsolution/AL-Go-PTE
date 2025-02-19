@@ -17,7 +17,7 @@
     "idRanges": [
       {
         "from": 50000,
-        "to": 50000
+        "to": 60000
       }
     ],
     "resourceExposurePolicy": {
@@ -25,7 +25,7 @@
       "allowDownloadingSource": true,
       "includeSourceInSymbolFile": true
     },
-    "runtime": "11.0",
+    "runtime": "14.0",
     "target": "Cloud",
     "features": ["TranslationFile"],
     "suppressWarnings": ["AS0084", "AS0051", "AS0092", "AS0094"],

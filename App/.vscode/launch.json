@@ -6,8 +6,8 @@
             "type": "al",
             "request": "launch",
             "environmentType": "Sandbox",
-            "environmentName": "Sandbox",
-            "tenant": "domain.se"
+            "environmentName": "BC25",
+            "tenant": "yellowsolution.se"
         }
     ]
 }

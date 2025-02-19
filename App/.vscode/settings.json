@@ -1,7 +1,10 @@
 {
     "al.enableCodeAnalysis": true,
     "al.codeAnalyzers": [
-    "${CodeCop}",
-    "${AppSourceCop}"
-    ]
+        "${CodeCop}",
+        "${AppSourceCop}",
+        "${analyzerfolder}BusinessCentral.LinterCop.dll",
+    ],
+    "al.enableExternalRulesets": true,
+    "al.ruleSetPath": "ruleset.json"
 }
