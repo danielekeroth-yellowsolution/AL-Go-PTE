@@ -2,10 +2,6 @@
     "country":  "se",
     "type": "PTE",
     "projectName": "ALGO-Pte",
-    "alDoc": {
-        "continuousDeployment": true,
-        "deployToGitHubPages": true
-    },
     "generateDependencyArtifact": true,
     "appDependencyProbingPaths": [
     ],
