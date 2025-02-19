@@ -1,7 +1,6 @@
 {
     "country":  "se",
     "type": "PTE",
-    "templateUrl": "https://github.com/YellowSolution/AL-Go-PTE",
     "projectName": "ALGO-Pte",
     "alDoc": {
         "continuousDeployment": true,
