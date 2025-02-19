@@ -8,14 +8,6 @@
     },
     "generateDependencyArtifact": true,
     "appDependencyProbingPaths": [
-        {
-            "repo": "",
-            "version": "",
-            "release_status": "",
-            "projects": "",
-            "branch": "",
-            "AuthTokenSecret": ""
-        }
     ],
     "appFolders":  [
     ],
