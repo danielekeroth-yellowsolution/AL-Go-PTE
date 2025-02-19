@@ -5,5 +5,12 @@
     "testFolders":  [
     ],
     "bcptTestFolders":  [
-    ]
+    ],
+    "enableCodeCop": true,
+    "customCodeCops": [
+        "https://github.com/StefanMaron/BusinessCentral.LinterCop/releases/latest/download/BusinessCentral.LinterCop.dll"
+    ],
+    "vsixFile": "Latest",
+    "enableExternalRulesets": true,
+    "rulesetFile": "ruleset.json"
 }
